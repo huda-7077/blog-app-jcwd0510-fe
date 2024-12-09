@@ -1,3 +1,7 @@
+"use client";
+import { useAppSelector } from "@/redux/hooks";
+
 export default function Home() {
-  return <h1>Homepage</h1>;
+  const user = useAppSelector((state) => state.user);
+  return <h1>Hello, {user.name}</h1>;
 }
