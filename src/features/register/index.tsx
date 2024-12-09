@@ -14,6 +14,7 @@ const RegisterPage = () => {
       name: "",
       email: "",
       password: "",
+      referralCode: "",
     },
     validationSchema: RegisterSchema,
     onSubmit: async (values) => {
@@ -74,8 +75,29 @@ const RegisterPage = () => {
                   </p>
                 ) : null}
               </div>
+              <div className="flex flex-col space-y-1.5">
+                <Label htmlFor="referralCode">Referral Code (Optional)</Label>
+                <Input
+                  name="referralCode"
+                  type="text"
+                  placeholder="Referral Code"
+                  value={formik.values.referralCode}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                />
+                {!!formik.touched.referralCode &&
+                !!formik.errors.referralCode ? (
+                  <p className="text-xs text-red-500">
+                    {formik.errors.referralCode}
+                  </p>
+                ) : null}
+              </div>
             </div>
-            <Button type="submit" className="mt-4 w-full" disabled={isPending}>
+            <Button
+              type="submit"
+              className="mt-4 w-full bg-[#80AE44] text-black hover:bg-[#9AC265]"
+              disabled={isPending}
+            >
               {isPending ? "loading..." : "Register"}
             </Button>
           </form>

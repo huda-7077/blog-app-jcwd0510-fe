@@ -11,4 +11,5 @@ export const RegisterSchema = Yup.object().shape({
     .minNumbers(1)
     .minUppercase(1)
     .min(6),
+  referralCode: Yup.string(),
 });
