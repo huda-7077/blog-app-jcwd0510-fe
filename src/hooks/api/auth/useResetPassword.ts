@@ -6,23 +6,28 @@ import { AxiosError } from "axios";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 
-interface ForgotPasswordPayload {
-  email: string;
+interface ResetPasswordPayload {
+  password: string;
 }
 
-const useForgotPassword = () => {
+const useResetPassword = (token: string) => {
   const router = useRouter();
   return useMutation({
-    mutationFn: async (payload: ForgotPasswordPayload) => {
-      const { data } = await axiosInstance.post(
-        "/auth/forgot-password",
+    mutationFn: async (payload: ResetPasswordPayload) => {
+      const { data } = await axiosInstance.patch(
+        "/auth/reset-password",
         payload,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
       );
       return data;
     },
     onSuccess: (data) => {
-      toast.success("Send email success");
-      router.push("/");
+      toast.success("Reset Password success");
+      router.push("/login");
     },
     onError: (error: AxiosError<any>) => {
       toast.error(error.response?.data);
@@ -30,4 +35,4 @@ const useForgotPassword = () => {
   });
 };
 
-export default useForgotPassword;
+export default useResetPassword;
