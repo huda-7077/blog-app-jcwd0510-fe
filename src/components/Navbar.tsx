@@ -2,9 +2,11 @@
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { logoutAction } from "@/redux/slices/userSlice";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const Navbar = () => {
   const dispatch = useAppDispatch();
+  const router = useRouter();
   const user = useAppSelector((state) => state.user);
 
   const logout = () => {
@@ -23,10 +25,12 @@ const Navbar = () => {
           <div className="flex cursor-pointer items-center gap-8 font-medium">
             <Link href="/">Home</Link>
             <Link href="/">Profile</Link>
-            {user.id ? (
-              <p onClick={logout}>Sign out</p>
-            ) : (
-              <Link href="/login">Sign in</Link>
+            {!user.id && <Link href="/login">Sign In</Link>}
+            {!!user.id && (
+              <>
+                <p onClick={() => router.push("/write")}>Write</p>
+                <p onClick={logout}>Logout</p>
+              </>
             )}
           </div>
         </div>
