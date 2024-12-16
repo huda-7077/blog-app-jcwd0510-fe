@@ -1,19 +1,32 @@
 "use client";
+import Markdown from "@/components/Markdown";
 import { Badge } from "@/components/ui/badge";
+import useDeleteBlog from "@/hooks/api/blog/useDeleteBlog";
 import useGetBlog from "@/hooks/api/blog/useGetBlog";
 import { format } from "date-fns";
 import Image from "next/image";
 import { FC } from "react";
+import ModalDelete from "./components/ModalDelete";
 import SkeletonBlog from "./components/SkeletonBlog";
-import Markdown from "@/components/Markdown";
+import { useAppSelector } from "@/redux/hooks";
 
 interface BlogDetailPageProps {
   blogId: number;
 }
 
 const BlogDetailPage: FC<BlogDetailPageProps> = ({ blogId }) => {
-  const { data, isPending } = useGetBlog(blogId);
-  if (isPending) {
+  const { data, isPending: isPendingGet } = useGetBlog(blogId);
+
+  const { mutateAsync: deleteBlog, isPending: isPendingDelete } =
+    useDeleteBlog();
+
+  const { id } = useAppSelector((state) => state.user);
+
+  const onClickDeleteBlog = async () => {
+    await deleteBlog(blogId);
+  };
+
+  if (isPendingGet) {
     return <SkeletonBlog />;
   }
 
@@ -27,9 +40,12 @@ const BlogDetailPage: FC<BlogDetailPageProps> = ({ blogId }) => {
 
         <h1 className="text-4xl font-semibold">{data.title} </h1>
 
-        <p>
-          {format(new Date(data.createdAt), "dd MMM yyyy")} - {data.user.name}
-        </p>
+        <div className="flex items-center justify-between">
+          <p>
+            {format(new Date(data.createdAt), "dd MMM yyyy")} - {data.user.name}
+          </p>
+          {id === data.userId && <ModalDelete onClick={onClickDeleteBlog} />}
+        </div>
 
         <div className="relative h-[400px]">
           <Image

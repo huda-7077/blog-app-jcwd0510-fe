@@ -3,7 +3,9 @@ import { Blog } from "@/types/blog";
 import { PageableResponse, PaginationQueries } from "@/types/pagination";
 import { useQuery } from "@tanstack/react-query";
 
-interface GetBlogsQueries extends PaginationQueries {}
+interface GetBlogsQueries extends PaginationQueries {
+  search?: string;
+}
 
 const useGetBlogs = (queries: GetBlogsQueries) => {
   return useQuery({
