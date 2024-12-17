@@ -102,7 +102,7 @@ const RegisterPage = () => {
               {isPending ? "loading..." : "Register"}
             </Button>
             <div className="mt-4 flex items-center justify-center text-xs">
-              Already have an account?{" "}
+              Already have an account?
               <Link className="text-blue-600 underline" href="/login">
                 Login
               </Link>
