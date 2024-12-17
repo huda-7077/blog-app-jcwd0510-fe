@@ -6,7 +6,6 @@ import { Label } from "@/components/ui/label";
 import { useFormik } from "formik";
 import { LoginSchema } from "./schemas";
 import useLogin from "@/hooks/api/auth/useLogin";
-import Link from "next/link";
 
 const LoginPage = () => {
   const { mutateAsync: login, isPending } = useLogin();
@@ -67,12 +66,6 @@ const LoginPage = () => {
             >
               {isPending ? "loading..." : "Login"}
             </Button>
-            <div className="mt-4 flex items-center justify-center text-xs">
-              Don't have an account?{" "}
-              <Link className="text-blue-600 underline" href="/register">
-                Register Here
-              </Link>
-            </div>
           </form>
         </CardContent>
       </Card>
