@@ -5,7 +5,7 @@ import StoreProvider from "@/providers/StoreProvider";
 import { ThemeProvider } from "@/providers/ThemeProvider";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
-import { NuqsAdapter } from "nuqs/adapters/next/app";
+import NuqsProvider from "@/providers/NuqsProvider";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./globals.css";
@@ -43,7 +43,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <NextAuthProvider>
-            <NuqsAdapter>
+            <NuqsProvider>
               <StoreProvider>
                 <ReactQueryProvider>
                   <Navbar />
@@ -51,7 +51,7 @@ export default function RootLayout({
                 </ReactQueryProvider>
                 <ToastContainer />
               </StoreProvider>
-            </NuqsAdapter>
+            </NuqsProvider>
           </NextAuthProvider>
         </ThemeProvider>
       </body>
