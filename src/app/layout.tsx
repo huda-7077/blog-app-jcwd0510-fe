@@ -8,7 +8,7 @@ import localFont from "next/font/local";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./globals.css";
-import ReactQueryProvider from "../providers/ReactQueryProvider";
+import ReactQueryProvider from "@/providers/ReactQuery";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
