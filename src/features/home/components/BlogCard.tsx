@@ -25,19 +25,23 @@ const BlogCard: FC<BlogCardProps> = ({ blog }) => {
           </div>
         </CardHeader>
         <CardContent>
-          <div className="flex items-center gap-2">
-            <Badge
-              variant="outline"
-              className="rounded-sm bg-green-100 text-green-600"
-            >
-              {blog.category}
-            </Badge>
-            <Badge
-              variant="outline"
-              className="rounded-sm bg-gray-100 text-gray-600"
-            >
-              {format(blog.createdAt, "dd MMM yyyy")}
-            </Badge>
+          <div className="mx-1 flex items-center justify-between">
+            <div className="flex gap-2">
+              <Badge
+                variant="outline"
+                className="rounded-sm bg-green-100 text-green-600"
+              >
+                {blog.category}
+              </Badge>
+              <Badge
+                variant="outline"
+                className="rounded-sm bg-gray-100 text-gray-600"
+              >
+                {format(blog.createdAt, "dd MMM yyyy")}
+              </Badge>
+            </div>
+
+            <p className="text-sm font-light">{blog.user.name}</p>
           </div>
 
           <h2 className="my-2 line-clamp-2 text-lg font-bold">{blog.title}</h2>
