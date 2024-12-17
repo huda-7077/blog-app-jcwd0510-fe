@@ -1,14 +1,14 @@
+import Navbar from "@/components/Navbar";
+import NextAuthProvider from "@/providers/NextAuthProvider";
+import ReactQueryProvider from "@/providers/ReactQueryProvider";
+import StoreProvider from "@/providers/StoreProvider";
+import { ThemeProvider } from "@/providers/ThemeProvider";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
-import "./globals.css";
-import Navbar from "@/components/Navbar";
+import { NuqsAdapter } from "nuqs/adapters/next/app";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import StoreProvider from "@/providers/StoreProvider";
-import AuthProvider from "@/providers/AuthProvider";
-import ReactQueryProvider from "@/providers/ReactQueryProvider";
-import { ThemeProvider } from "@/providers/ThemeProvider";
-import TokenProvider from "@/providers/TokenProvider";
+import "./globals.css";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -42,17 +42,17 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <StoreProvider>
-            <AuthProvider>
-              <TokenProvider>
+          <NextAuthProvider>
+            <NuqsAdapter>
+              <StoreProvider>
                 <ReactQueryProvider>
                   <Navbar />
                   {children}
                 </ReactQueryProvider>
                 <ToastContainer />
-              </TokenProvider>
-            </AuthProvider>
-          </StoreProvider>
+              </StoreProvider>
+            </NuqsAdapter>
+          </NextAuthProvider>
         </ThemeProvider>
       </body>
     </html>

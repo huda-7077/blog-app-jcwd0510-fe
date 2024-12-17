@@ -1,15 +1,16 @@
 "use client";
 
-import useGetBlogs from "@/hooks/api/blog/useGetBlogs";
-import BlogCard from "./BlogCard";
 import PaginationSection from "@/components/PaginationSection";
-import { useState } from "react";
 import { Input } from "@/components/ui/input";
+import useGetBlogs from "@/hooks/api/blog/useGetBlogs";
+import { parseAsInteger, useQueryState } from "nuqs";
 import { useDebounceValue } from "usehooks-ts";
+import BlogCard from "./BlogCard";
 
 const BlogList = () => {
-  const [page, setPage] = useState<number>(1);
-  const [search, setSearch] = useState<string>("");
+  const [page, setPage] = useQueryState("page", parseAsInteger.withDefault(1));
+
+  const [search, setSearch] = useQueryState("search", { defaultValue: "" });
 
   const [debouncedValue] = useDebounceValue(search, 500);
 
@@ -24,7 +25,10 @@ const BlogList = () => {
       <Input
         className="mx-auto my-4 max-w-xl"
         placeholder="Search..."
-        onChange={(e) => setSearch(e.target.value)}
+        onChange={(e) => {
+          setSearch(e.target.value);
+          setPage(1);
+        }}
         value={search}
       />
       {isPending && (
