@@ -6,7 +6,6 @@ import { Label } from "@/components/ui/label";
 import useRegister from "@/hooks/api/auth/useRegister";
 import { useFormik } from "formik";
 import { RegisterSchema } from "./schemas";
-import Link from "next/link";
 
 const RegisterPage = () => {
   const { mutateAsync: register, isPending } = useRegister();
@@ -101,12 +100,6 @@ const RegisterPage = () => {
             >
               {isPending ? "loading..." : "Register"}
             </Button>
-            <div className="mt-4 flex items-center justify-center text-xs">
-              Already have an account?{" "}
-              <Link className="text-blue-600 underline" href="/login">
-                Login
-              </Link>
-            </div>
           </form>
         </CardContent>
       </Card>

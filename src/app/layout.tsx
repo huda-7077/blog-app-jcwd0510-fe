@@ -1,11 +1,11 @@
 import Navbar from "@/components/Navbar";
 import NextAuthProvider from "@/providers/NextAuthProvider";
-import NuqsProvider from "@/providers/NuqsProvider";
 import ReactQueryProvider from "@/providers/ReactQueryProvider";
 import StoreProvider from "@/providers/StoreProvider";
 import { ThemeProvider } from "@/providers/ThemeProvider";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import { NuqsAdapter } from "nuqs/adapters/next/app";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./globals.css";
@@ -43,7 +43,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <NextAuthProvider>
-            <NuqsProvider>
+            <NuqsAdapter>
               <StoreProvider>
                 <ReactQueryProvider>
                   <Navbar />
@@ -51,7 +51,7 @@ export default function RootLayout({
                 </ReactQueryProvider>
                 <ToastContainer />
               </StoreProvider>
-            </NuqsProvider>
+            </NuqsAdapter>
           </NextAuthProvider>
         </ThemeProvider>
       </body>
