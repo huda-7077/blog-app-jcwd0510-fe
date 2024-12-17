@@ -1,10 +1,10 @@
 import Navbar from "@/components/Navbar";
 import NextAuthProvider from "@/providers/NextAuthProvider";
+import NuqsProvider from "@/providers/NuqsProvider";
 import StoreProvider from "@/providers/StoreProvider";
 import { ThemeProvider } from "@/providers/ThemeProvider";
 import type { Metadata } from "next";
 import localFont from "next/font/local";
-import NuqsProvider from "@/providers/NuqsProvider";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./globals.css";
