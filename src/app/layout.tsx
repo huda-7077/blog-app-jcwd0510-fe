@@ -1,3 +1,4 @@
+import ReactQueryProvider from "@/providers/ReactQueryProvider";
 import Navbar from "@/components/Navbar";
 import NextAuthProvider from "@/providers/NextAuthProvider";
 import StoreProvider from "@/providers/StoreProvider";
